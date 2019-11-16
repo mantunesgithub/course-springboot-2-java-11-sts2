@@ -1,14 +1,18 @@
 package br.com.udemy.curso4.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-
+@Table(name = "tb_user")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -30,6 +34,8 @@ public class User implements Serializable {
 		this.phone = phone;
 		this.passwaord = passwaord;
 	}
+	@OneToMany(mappedBy = "client")
+	private	List<Order> orders = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -70,6 +76,10 @@ public class User implements Serializable {
 	public void setPasswaord(String passwaord) {
 		this.passwaord = passwaord;
 	}
+	public List<Order> getOrders() {
+		return orders;
+	}
+
 
 	@Override
 	public int hashCode() {
